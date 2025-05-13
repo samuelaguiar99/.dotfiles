@@ -1,0 +1,12 @@
+
+#IGNORE EVERYTHING
+*
+!.gitignore
+!.config
+!.config/nvim
+!.config/tmux
+!.config/tmux/**
+!.config/nvim/**
+!sessionize_tmux
+
+!.zshrc

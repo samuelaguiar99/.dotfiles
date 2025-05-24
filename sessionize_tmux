@@ -18,7 +18,7 @@ if [ -z "$name_filter" ]; then
 fi
 
 # --- Hardcoded Exclusions ---
-exclude_patterns="node_modules,backup,tmp,.git,dist"
+exclude_patterns="node_modules,backup,tmp,.git,dist,workspace"
 grep_exclude_pattern=$(echo "$exclude_patterns" | sed 's/,/\\|/g')
 
 # Find directories whose basename matches the filter
@@ -46,10 +46,12 @@ tmux kill-session -t "$session_name" 2>/dev/null
 tmux new-session -d -s "$session_name" -c "$selected_dir" -n nvim
 tmux send-keys -t "$session_name":1.0 "nvim ." C-m
 
-# Second window with bash + mysql split
+# Second window with terminal in directory
 tmux new-window -t "$session_name":2 -n bash -c "$selected_dir"
-tmux split-window -h -t "$session_name":2 -c "$selected_dir"
-tmux send-keys -t "$session_name":2.1 "sudo mysql" C-m
+
+#Third window with mysql running
+tmux new-window -t "$session_name":3 -n bash -c "$selected_dir"
+tmux send-keys -t "$session_name":3 "sudo mysql" C-m
 
 # Attach to the session
 tmux select-window -t "$session_name":1

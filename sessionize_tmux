@@ -44,7 +44,7 @@ tmux kill-session -t "$session_name" 2>/dev/null
 
 # Create first window with nvim
 tmux new-session -d -s "$session_name" -c "$selected_dir" -n nvim
-tmux send-keys -t "$session_name":1.0 "nvim ." C-m
+tmux send-keys -t "$session_name":1.1 "nvim ." C-m
 
 # Second window with terminal in directory
 tmux new-window -t "$session_name":2 -n bash -c "$selected_dir"
